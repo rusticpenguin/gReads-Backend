@@ -44,16 +44,24 @@ app.route("/books/:id")
         );
     })
     .put((req, res) => {
-        Book.findByIdAndUpdate({_id: req.params.id})
-            .then(data => {
-                Book.findOne({_id: req.params.id})
-                    .then(data => res.send(data))
+        Book.findById(req.params.id, (err, book) => {
+            if (err) res.send(err);
+
+            if (req.body.title) book.title = req.body.title;
+            if (req.body.bookGenre) book.bookGenre = req.body.bookGenre;
+            if (req.body.bookDescription) book.bookDescription = req.body.bookDescription;
+            if (req.body.bookCoverURL) book.bookCoverURL = req.body.bookCoverURL;
+
+            book.save( function (err) {
+                if (err) send (err);
+                res.json({message: 'Book has been UPDATED!'});
             });
+        });
     })
     .delete((req, res) => {
         Book.deleteOne({_id: req.params.id}, (err, book) => {
             if (err) return res.send(err);
-            res.json({ message: 'Book has been Deleted'});
+            res.json({ message: 'Book has been DELETED!'});
         });
     })
 
