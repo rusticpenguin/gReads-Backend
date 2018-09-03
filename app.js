@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended:true}));
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.get("/", (req, res) => {
-    res.redirect("/");
+    res.json({message: 'Please use the /books or /authors route'});
 })
 
 app.route("/books")
