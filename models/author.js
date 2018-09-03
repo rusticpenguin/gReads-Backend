@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const authorSchema = new Schema({
-    firstName: { type: String, required: true },
-    lastName: {type: String, required: true },
+    firstName: { type: String, required: [true, "Author's first name required"] },
+    lastName: {type: String, required: [true, "Author's last name required"]},
     bio: { type: String, required: false},
     portraitURL: { type: String, required: false}
 });

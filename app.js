@@ -65,6 +65,52 @@ app.route("/books/:id")
         });
     })
 
+app.route("/authors")
+    .get((req, res) => {
+        Author.find({}, (err, foundAuthors) => {
+            if (err) res.status(404).end();
+            res.status(200).json({foundAuthors});
+            }
+        );
+    })
+    .post((req, res) => {
+        Author.create(req.body, (err)=>{
+            if(err) res.status(418).end();
+            res.status(200).json(req.body).end();
+            }
+        )
+    })
+
+app.route("/authors/:id")
+    .get((req, res) => {
+        Author.findById(req.params.id, (err, foundAuthors) => {
+            if (err) res.status(404).end();
+            res.status(200).json({foundAuthors});
+            }
+        );
+    })
+    .put((req, res) => {
+        Author.findById(req.params.id, (err, author) => {
+            if (err) res.send(err);
+
+            if (req.body.firstName) author.firstName = req.body.firstName;
+            if (req.body.lastName) author.lastName = req.body.lastName;
+            if (req.body.bio) author.bio = req.body.bio;
+            if (req.body.portraitURL) author.portraitURL = req.body.portraitURL;
+
+            author.save( function (err) {
+                if (err) send (err);
+                res.json({message: 'Author has been UPDATED!'});
+            });
+        });
+    })
+    .delete((req, res) => {
+        Author.deleteOne({_id: req.params.id}, (err, author) => {
+            if (err) return res.send(err);
+            res.json({ message: 'Author has been DELETED!'});
+        });
+    })
+
 app.listen(port, () => {
     console.log("listening on port ", port);
 })
