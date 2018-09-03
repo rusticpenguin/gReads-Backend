@@ -31,8 +31,7 @@ app.route("/books")
         Book.create(req.body, (err)=>{
             if(err) res.status(418).end();
             res.status(200).json(req.body).end();
-            }
-        )
+        })
     })
 
 app.route("/books/:id")
@@ -51,6 +50,7 @@ app.route("/books/:id")
             if (req.body.bookGenre) book.bookGenre = req.body.bookGenre;
             if (req.body.bookDescription) book.bookDescription = req.body.bookDescription;
             if (req.body.bookCoverURL) book.bookCoverURL = req.body.bookCoverURL;
+            if (req.body.authors) book.authors = req.body.authors;
 
             book.save( function (err) {
                 if (err) send (err);
@@ -97,7 +97,8 @@ app.route("/authors/:id")
             if (req.body.lastName) author.lastName = req.body.lastName;
             if (req.body.bio) author.bio = req.body.bio;
             if (req.body.portraitURL) author.portraitURL = req.body.portraitURL;
-
+            if (req.body.books) author.books = req.body.books;
+            
             author.save( function (err) {
                 if (err) send (err);
                 res.json({message: 'Author has been UPDATED!'});
