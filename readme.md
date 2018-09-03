@@ -1,7 +1,7 @@
 [gReads Logo](#)
 ___
-# Rino Tech: Safe Space 
-SafeSpace, a place where people from all walks of life to come together to discuss what their going through and also for others to give guidance along the way.
+# gReads
+Where you can search books.
 ___
 ## Live Demos
 Front end deployed **[here](#)**
