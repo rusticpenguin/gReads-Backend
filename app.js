@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 
-mongoose.connect(process.env.MONGODBURL, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 app.get("/", (req, res) => {
     res.redirect("/");
