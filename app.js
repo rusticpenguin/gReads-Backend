@@ -69,7 +69,7 @@ app.route("/books/:id")
 app.route("/authors")
     .get((req, res) => {
         Author.find({}, (err, foundAuthors) => {
-            if (err) res.status(404).end();
+            if (err) res.status(404).json({message: `Failed to post to Authors ${err}`}).end();
             res.status(200).json({foundAuthors});
             }
         );
