@@ -29,9 +29,10 @@ app.route("/books")
     })
     .post((req, res) => {
         Book.create(req.body, (err)=>{
-            if(err) res.status(418).end();
-            res.status(200).json(req.body).end();
-        })
+            if (err) res.status(404).json({message: `Failed to post to Books ${err}`}).end();
+            res.status(200).json(req.body);
+        }
+        )
     })
 
 app.route("/books/:id")
@@ -98,7 +99,7 @@ app.route("/authors/:id")
             if (req.body.bio) author.bio = req.body.bio;
             if (req.body.portraitURL) author.portraitURL = req.body.portraitURL;
             if (req.body.books) author.books = req.body.books;
-            
+
             author.save( function (err) {
                 if (err) send (err);
                 res.json({message: 'Author has been UPDATED!'});
